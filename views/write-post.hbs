@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/form.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item">
+                    <a href="/"> Home </a>
+                </li>
+            </ul>
+            <ul class="main-header__item-list">
+                <div class="admin-nav">
+                    <li class="main-header__item">
+                        <a href="/admin/dashboard"> Dashboard </a>
+                    </li>
+                    <li class="main-header__item">
+                        <a class="active" href="/admin/write-post"> Write
+                            Post </a>
+                    </li>
+                    <li class="main-header__item">
+                        <a href="/admin/logout"> Logout </a>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {{#if errorMessage}}
+        <h3 class="errorMessage">{{errorMessage}}</h3>
+        {{/if}}
+        <form class="blog-form" action="/admin/{{#if editing}}edit-post{{else}}write-post{{/if}}" method="POST"
+            enctype="multipart/form-data">
+            <div class="form-control">
+                <label for="title"> Title</label>
+                <input type="text" name="title" id="title" required value="{{#if editing}} {{blog.title}} {{/if}}">
+            </div>
+            <div class="form-control">
+                <label for="image"> Image</label>
+                <input type="file" name="image" id="image" {{#if editing}} {{else}} required {{/if}} />
+            </div>
+            <div class="form-control">
+                <label for="content"> Content</label>
+                <textarea name="content" required id="content" rows="15"
+                    cols="10">{{#if editing}} {{blog.content}} {{/if}}</textarea>
+                {{#if editing}}<input type="hidden" name="blogId" value="{{blog._id}}" /> {{/if}}
+                {{#if editing}} <h3><input id="submit-button" type="submit" name="submit" value="Update Post" /></h3>
+                {{else}} <h3><input id="submit-button" type="submit" name="submit" value="Submit Post" /></h3> {{/if}}
+            </div>
+        </form>
+    </main>
+
+</body>
+
+</html>

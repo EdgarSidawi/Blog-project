@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>{{pageTitle}}</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/blog.css">
+</head>
+
+<body>
+  <header class="main-header">
+    <nav class="main-header__nav">
+      <ul class="main-header__item-list">
+        <li class="main-header__item">
+          <a class="active" href="/">Home</a>
+        </li>
+      </ul>
+      {{#if isAuthenticated}}
+      <ul class="main-header__item-list">
+        <div class="admin-nav">
+          <li class="main-header__item">
+            <a href="/admin/dashboard"> Dashboard </a>
+          </li>
+          <li class="main-header__item">
+            <a href="/admin/write-post"> Write
+              Post </a>
+          </li>
+          <li class="main-header__item">
+            <a href="/admin/logout"> Logout </a>
+          </li>
+        </div>
+      </ul>
+      {{else}}
+      <ul class="main-header__item-list">
+        <li class="main-header__item">
+          <a href="/signup"> Sign Up </a>
+        </li>
+        <li class="main-header__item">
+          <a href="/login"> Login </a>
+        </li>
+      </ul>
+      {{/if}}
+    </nav>
+  </header>
+
+  <main>
+    {{#each blog}}
+    <article class="main-body">
+      <div class="blog-info">
+        <h5 class="info">Posted by {{this.creator}} on 10/15/2019</h5>
+      </div>
+      <div class="blog-body">
+        <h3 class="body">{{this.title}}</h3>
+      </div>
+
+      <div class="blog-control">
+        <ul class="blog-control__item-list">
+          <li><a class="blog-control__item" href="/blog/{{this._id}}">View</a></li>
+        </ul>
+      </div>
+    </article>
+    {{/each}}
+  </main>
+  {{#if blog}}
+  <section class="pagination">
+    {{#if validIndex}}
+    <a href="/?page=1">1</a>
+    {{/if}}
+    {{#if hasPreviousPage}}
+    <a href="/?page={{previousPage}}">{{previousPage}}</a>
+    {{/if}}
+    <a class="active" href="/?page={{currentPage}}">{{currentPage}}</a>
+    {{#if hasNextPage}}
+    <a href="/?page={{nextPage}}">{{nextPage}}</a>
+    {{/if}}
+    {{#if validLastPage}}
+    <a href="/?page={{lastPage}}">{{lastPage}}</a>
+    {{/if}}
+  </section>
+  {{/if}}
+</body>
+
+</html>

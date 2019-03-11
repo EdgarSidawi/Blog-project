@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/form.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item">
+                    <a href="/">Home</a>
+                </li>
+            </ul>
+            <ul class="main-header__item-list">
+                <li class="main-header__item">
+                    <a class="active" href="/signup"> Sign Up </a>
+                </li>
+                <li class="main-header__item">
+                    <a href="/login"> Login </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {{#if errorMessage}}
+        <h3 class="errorMessage">{{errorMessage}}</h3>
+        {{/if}}
+        <form class="blog-form" action="/signup" method="POST">
+            <div class="form-control">
+                <label for="Username"> Username</label>
+                <input type="text" name="username" required id="username"
+                    value="{{#if errorMessage}} {{oldInput.username}} {{/if}}">
+            </div>
+            <div class="form-control">
+                <label for="email"> Email</label>
+                <input type="email" name="email" required id="email"
+                    value="{{#if errorMessage}} {{oldInput.email}} {{/if}}">
+            </div>
+            <div class="form-control">
+                <label for="password"> Password</label>
+                <input type="password" name="password" required id="password">
+
+                <h3><input id="signup" type="submit" name="signup" value="Sign Up"></h3>
+            </div>
+        </form>
+    </main>
+</body>
+
+</html>

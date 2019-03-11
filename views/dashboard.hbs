@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/blog.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item">
+                    <a href="/"> Home </a>
+                </li>
+            </ul>
+            <ul>
+                <div class="admin-nav">
+                    <li class="main-header__item">
+                        <a class="active" href="/admin/dashboard"> Dashboard </a>
+                    </li>
+                    <li class="main-header__item">
+                        <a href="/admin/write-post"> Write
+                            Post </a>
+                    </li>
+                    <li class="main-header__item">
+                        <a href="/admin/logout"> Logout </a>
+                    </li>
+                </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {{#each blog}}
+        <article class="main-body">
+            <div class="blog-info">
+                <h5 class="info">Posted by {{this.creator}} on 10/15/2019</h5>
+            </div>
+            <div class="blog-body">
+                <h3 class="body">{{this.title}}</h3>
+            </div>
+
+            <div class="blog-control">
+                <ul class="blog-control__item-list">
+                    <li><a class="blog-control__item" href="/admin/blog/{{this._id}}">View</a></li>
+                </ul>
+                <ul class="blog-control__item-list">
+                    <li><a class="blog-control__item" href="/admin/edit-post/{{this._id}}">Edit</a></li>
+                    <li><a class="blog-control__item" href="/admin/delete/{{this._id}}">Delete</a></li>
+                </ul>
+            </div>
+        </article>
+        {{/each}}
+    </main>
+    <h1>{{#if blog}} {{else}}No Blogs to display{{/if}} </h1>
+
+    {{#if blog}}
+    <section class="pagination">
+        {{#if validIndex}}
+        <a href="/admin/dashboard?page=1">1</a>
+        {{/if}}
+        {{#if hasPreviousPage}}
+        <a href="/admin/dashboard?page={{previousPage}}">{{previousPage}}</a>
+        {{/if}}
+        <a class="active" href="/admin/dashboard?page={{currentPage}}">{{currentPage}}</a>
+        {{#if hasNextPage}}
+        <a href="/admin/dashboard?page={{nextPage}}">{{nextPage}}</a>
+        {{/if}}
+        {{#if validLastPage}}
+        <a href="/admin/dashboard?page={{lastPage}}">{{lastPage}}</a>
+        {{/if}}
+    </section>
+    {{/if}}
+</body>
+
+</html>
