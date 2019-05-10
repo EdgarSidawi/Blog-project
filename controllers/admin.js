@@ -53,7 +53,7 @@ exports.getWritePost = (req, res, next) => {
 };
 
 exports.getEditPost = (req, res, next) => {
-  blogId = req.params.blogId;
+  const blogId = req.params.blogId;
   Blog.findById(blogId)
     .then(blog => {
       res.render('write-post', {
